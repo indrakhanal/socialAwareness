@@ -1,0 +1,12 @@
+.wrapper {
+  width: 100%;
+  @include ltr-rtl("padding-left", var(--cui-sidebar-occupy-start, 0));
+  will-change: auto;
+  @include transition(padding .15s);
+  // padding: 0px !important;
+  // padding-left: 0px !important;
+}
+
+// html:not([dir="rtl"]) .me-auto {
+//   margin-left: 280px !important;  
+// }
