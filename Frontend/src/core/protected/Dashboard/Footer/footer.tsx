@@ -13,7 +13,7 @@ const AppFooter = () => {
       <div className="ms-auto">
         <span className="me-1">Powered by</span>
         <a href="#" target="_blank" rel="noopener noreferrer">
-          SmartTech Solution Pvt.Ltd.
+          ######
         </a>
       </div>
     </CFooter>

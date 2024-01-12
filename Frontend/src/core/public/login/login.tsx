@@ -190,13 +190,13 @@ const LoginForm = ({ authorizing, handleLogin }: LoginFormProps) => {
           </div>
         </div>
       </form>
-      <div className="auth-signup">
+      {/* <div className="auth-signup">
       <Button
       className="btn btn-outlined-primary"
       text={"Sign in with Google"}
       onClick={() => handleGoogleLogin()}>
       </Button>
-      </div>
+      </div> */}
       <div className="auth-signup">
           <p className="align-vertical">Dont't have an account? 
             <Link to="/signup">Sign Up</Link>

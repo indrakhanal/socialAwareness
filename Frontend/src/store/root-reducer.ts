@@ -52,6 +52,7 @@ export const logoutAction = () => {
     } catch (err) {
         console.error("LogOut Error", err);
     }
-
+    window.location.reload()
     return { type: "USER_LOG_OUT", payload: {} };
+
 };
