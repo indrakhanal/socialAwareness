@@ -19,7 +19,7 @@
         }
       }
       &-title {
-        // @include des;
+        @include des;
       }
 
       &.label {
@@ -101,16 +101,16 @@
             color: $white;
             padding-bottom: 2px;
             width: 100%;
-            // @include h6;
+            @include h6;
           }
           p {
             color: $white;
-            // @include des;
+            @include des;
           }
           [class^="ic-"],
           [class*=" ic-"] {
             color: white;
-            // @include small;
+            @include small;
             margin-right: -8px;
             cursor: pointer;
           }
@@ -174,17 +174,17 @@
               color: $white;
               padding-bottom: 2px;
               width: 100%;
-              // @include h6;
+              @include h6;
             }
 
             p {
               color: $white;
-              // @include des;
+              @include des;
             }
 
             i {
               color: white;
-              // @include small;
+              @include small;
               // margin-right: -8px;
             }
           }

@@ -6,7 +6,7 @@
     thead {
         th,
         td {
-            // @include des;
+            @include des;
             color: $table-head-color;
         }
         th {
@@ -20,7 +20,7 @@
     }
     tbody {
         td {
-            // @include des;
+            @include des;
             vertical-align: middle;
             border-top: 1px solid $gray-100;
             color: $gray-900;
@@ -145,7 +145,6 @@
             display: flex;
             align-items: center;
             justify-content: space-around;
-            height: 70px;
             img {
                 height: 1.0rem !important;
                 width: 1.0rem !important;
@@ -228,7 +227,7 @@
 .status {
     display: flex;
     align-items: center;
-    // @include des;
+    @include des;
 }
 
 .uploaded-name {
@@ -274,8 +273,8 @@
             color: #000;
             text-align: center;
             font-family: "Roboto";
-            font-size: 13px;
-            // @include letter-spacing(31.25);
+            font-size: 14px;
+            @include letter-spacing(31.25);
             line-height: 25px;
             font-weight: bold;
             border-bottom: 1px solid #343A40;
@@ -295,13 +294,12 @@
             font-size: 0.75rem;
             color: #b3b8bd;
             text-align: center;
-            // @include letter-spacing(48.06);
+            @include letter-spacing(48.06);
         }
         .action {
             display: flex;
             align-items: center;
             justify-content: space-around;
-            min-height: 82px;
             img {
                 height: 1.0rem !important;
                 width: 1.0rem !important;

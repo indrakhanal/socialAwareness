@@ -92,7 +92,7 @@
       justify-content: space-between;
       align-items: center;
       color: map-get($sidebar, linkColor);
-      // @include des;
+      @include des;
       padding: 0.5rem;
       // @include lhCrop(1.2); //line-height: 1.2
       line-height: 1;
@@ -156,7 +156,7 @@
     }
 
     a {
-      // @include des;
+      @include des;
       padding: 0.5rem;
       line-height: 1;
     }
@@ -174,7 +174,7 @@
     a {
       display: block;
       padding: 0.5rem 1.5rem;
-      // @include des;
+      @include des;
       color: black;
       background-color: $gray-200;
 
@@ -184,12 +184,12 @@
       }
     }
     &_scrolllg {
-      // @include media-breakpoint-down(lg) {
-      //   display: flex;
-      //   margin-bottom: 1rem;
-      //   @include scrollable($blue);
-      //   padding-bottom: 0.5rem;
-      // }
+      @include media-breakpoint-down(lg) {
+        display: flex;
+        margin-bottom: 1rem;
+        @include scrollable($blue);
+        padding-bottom: 0.5rem;
+      }
 
       li {
         @include media-breakpoint-down(lg) {
@@ -208,7 +208,7 @@
     li {
       & > a {
         display: block;
-        // @include des;
+        @include des;
         font-weight: 600;
         border-bottom: 2px solid transparent;
         position: relative;
@@ -234,7 +234,7 @@
     }
     &.scroll {
       flex-wrap: nowrap;
-      // @include scrollable;
+      @include scrollable;
 
       li {
         flex-shrink: 0;
@@ -249,7 +249,7 @@
       align-items: center;
       // border-bottom: 1px solid $gray-100;
       padding: 6px 12px;
-      // @include des;
+      @include des;
       background-color: $cool-gray-100;
       margin-bottom: 2px;
       border-radius: 2px;
@@ -274,9 +274,9 @@
         margin-right: 0.5rem;
       }
 
-      // i {
-      //   @include des;
-      // }
+      i {
+        @include des;
+      }
 
       &:not([aria-expanded="true"]):hover {
         background-color: $cool-gray-200;

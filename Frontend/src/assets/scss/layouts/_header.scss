@@ -19,7 +19,7 @@ $header-bg: #FFFFFF;
         h6 {
             margin-left: 0.5rem;
             color: $theme-dark-blue;
-            // @include des;
+            @include des;
             font-weight: 400;
             @include media-breakpoint-down(sm) {
                 display: none;

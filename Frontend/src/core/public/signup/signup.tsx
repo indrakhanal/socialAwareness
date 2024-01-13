@@ -120,7 +120,7 @@ const SignupForm = ({ handleRegister }: SignupFormProps) => {
   return (
     <div className='auth-signupbody'>
       <form className='' autoComplete='off' onSubmit={handleSubmit}>
-        <p className=''>Plese Sign for your ABC System Portal</p>
+        <h6 className=''>Sign UP</h6>
         <div className='auth-signupform'>
           <div className='form-group align-vertical'>
             <label htmlFor="" className='mr-4 label'>

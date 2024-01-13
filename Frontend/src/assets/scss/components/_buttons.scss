@@ -1,7 +1,7 @@
 .btn {
-  // &-sm {
-  //   @include small;
-  // }
+  &-sm {
+    @include small;
+  }
 
   &-icon {
     display: inline-flex;

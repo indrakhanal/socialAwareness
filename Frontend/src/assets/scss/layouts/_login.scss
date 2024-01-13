@@ -100,7 +100,7 @@
     .heading {
       color: $red;
       font-weight: 400;
-      // @include des;
+      @include des;
       margin-top: 0.5rem;
     }
     .dept {
@@ -176,7 +176,7 @@
     .list-process {
       li {
         a {
-          // @include h6;
+          @include h6;
           background-color: $red;
           padding: 0.75rem 1.5rem;
           border: none;

@@ -1,0 +1,32 @@
+/* Assuming that your HTML structure includes a container element with class "row" */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  
+  #campaign {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f4f4; /* Set your desired background color */
+  }
+  
+  .row {
+    margin-left: 200px; /* Adjust margin-left as needed */
+  }
+  
+  /* Additional styles for the "Coming Soon!!" text */
+  h1 {
+    font-size: 36px;
+    color: #333333; /* Set your desired text color */
+    text-align: center;
+  }
+  h3 {
+    font-size: 36px;
+    color: #333333; /* Set your desired text color */
+    text-align: center;
+  }
+  

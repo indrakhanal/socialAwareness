@@ -12,16 +12,8 @@ import { RootState } from "../../../store/root-reducer";
 import { object as YupObject, string as YupString } from "yup";
 import { useTranslation } from "react-i18next";
 import '../login/login.scss';
-// import {Configure} from '../../../components/Notifier/Notifier';
 import toast from "../../../components/Notifier/Notifier";
-// import {loginGoogle} from '../authSocial/googlelogin'
 import TokenService from "../../../services/jwt-token/jwt-token";
-
-import { useGoogleLogin } from '@react-oauth/google';
-
-
-
-
 
 
 interface Props extends PropsFromRedux {}
@@ -106,40 +98,18 @@ const LoginForm = ({ authorizing, handleLogin }: LoginFormProps) => {
     },
   });
 
-  const history = useNavigate(); 
-  const handleGoogleLogin  = useGoogleLogin({
-    onSuccess:(response) =>{
-      if(response?.access_token){
-        console.log(response, "test");
-        TokenService.setToken({"access":response.access_token})
-        const successMessage = "Logged In Successful"
-        toast.success(successMessage)
-        history("/home");
-      }
-      else{
-        toast.error("Error While Login With Google")
-      }
-    }
-  });
-
-  
-  const loginGoogle = useGoogleLogin({
-    onSuccess: tokenResponse => console.log(tokenResponse, "token from google login"),
-  });
-
   return (
     <div className="auth-body">
       <form className="" onSubmit={handleSubmit} autoComplete="off">
         {/* <h5 className="mb-2 font-bold">Water</h5> */}
-        <p className="">ABC System Login Portal</p>
+        <p className="">Advanced Consulting Services</p>
 
-        <h6 className="mb-2 font-bold">CONFIGURATIONS</h6>
+        <h6 className="mb-2 font-bold">LOGIN PORTAL</h6>
 
         <div className="auth-form">
           <div className="form-group align-vertical">
             <label htmlFor="" className="mr-4 label">
-              username    
-              {/* {t("login:input.email.title")} */}
+              Email    
             </label>
             <input
               className="form-control"
@@ -147,7 +117,7 @@ const LoginForm = ({ authorizing, handleLogin }: LoginFormProps) => {
               value={values.email}
               onChange={handleChange}
               required
-              // style={{ marginLeft:"27px"}}
+              style={{ marginLeft:"27px"}}
             />
             <FormikValidationError name="email" errors={errors} touched={touched} />
           </div>
@@ -176,13 +146,8 @@ const LoginForm = ({ authorizing, handleLogin }: LoginFormProps) => {
           </div>
 
           <div className="auth-footer">
-            {/* <div className="flex-grow-1 des">
-                    <span className="text-coolGray600">{t("login:dontHaveAnAccount.title")} </span>
-                    <Link to="/register" className="text-blue">{t("register:title")}</Link>
-                </div> */}
             <Button
               className="btn btn-outlined-primary"
-              // text={t("login:title")}
               text={"Login"}
               disabled={authorizing}
               loading={authorizing}
@@ -190,13 +155,6 @@ const LoginForm = ({ authorizing, handleLogin }: LoginFormProps) => {
           </div>
         </div>
       </form>
-      {/* <div className="auth-signup">
-      <Button
-      className="btn btn-outlined-primary"
-      text={"Sign in with Google"}
-      onClick={() => handleGoogleLogin()}>
-      </Button>
-      </div> */}
       <div className="auth-signup">
           <p className="align-vertical">Dont't have an account? 
             <Link to="/signup">Sign Up</Link>

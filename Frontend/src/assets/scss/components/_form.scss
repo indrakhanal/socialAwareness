@@ -9,7 +9,7 @@
                 right: 0.5rem;
                 top: 50%;
                 transform: translateY(-50%);
-                // @include des;
+                @include des;
             }
             .form-control {
                 padding-right: 1.5rem;
@@ -59,7 +59,7 @@
             cursor: pointer;
             display: flex;
             align-items: center;
-            // @include des;
+            @include des;
             color: $gray-600;
             font-weight: 400;
             margin-bottom: 0;
@@ -76,7 +76,7 @@
         }
         i,
         svg {
-            // @include small;
+            @include small;
             color: $gray-500;
             @include hover {
                 color: $blue;
@@ -155,7 +155,7 @@
             margin: 0;
             width: 100%;
             background-color: transparent;
-            // @include des;
+            @include des;
         }
         select {
             -webkit-appearance: none;
@@ -169,7 +169,7 @@
         i,
         svg {
             color: $gray-500;
-            // @include h5;
+            @include h5;
             @include hover {
                 color: $blue;
                 cursor: pointer;
@@ -207,7 +207,7 @@
             justify-content: space-between;
             align-items: center;
             .close {
-                // @include small;
+                @include small;
                 color: $red;
             }
         }
@@ -383,13 +383,13 @@
         }
         .value {
             font-weight: 600;
-            // @include h6;
+            @include h6;
         }
     }
 }
 
 .chip {
-    // @include small;
+    @include small;
     color: $dark;
     background-color: #f0f0f0;
     border-radius: 2px;
@@ -439,8 +439,7 @@
     align-items: center;
     line-height: 1;
     margin-top: 4px;
-    font-size: .694rem;
-    // @include small;
+    @include small;
     i {
         display: inline-block;
         margin-right: 0.25rem;
@@ -477,7 +476,7 @@
     &--text {
         color: $secondary;
         font-weight: 400;
-        // @include des;
+        @include des;
     }
     &--custom {
         position: relative;
@@ -588,7 +587,7 @@
         label {
             height: 76px;
             color: $cool-gray-600;
-            // @include des;
+            @include des;
             padding: 0 1rem;
             display: flex;
             // flex-direction: column;
@@ -620,7 +619,7 @@
                 background-color: $blue-10;
                 margin-bottom: 1rem;
                 i {
-                    // @include des;
+                    @include des;
                 }
             }
         }
@@ -649,17 +648,17 @@
             }
             .textbox {
                 h6 {
-                    // @include des;
+                    @include des;
                 }
                 p {
-                    // @include small;
+                    @include small;
                     color: $gray-600;
                     margin-bottom: 0;
                 }
             }
             .close {
                 color: $secondary;
-                // @include des;
+                @include des;
                 transition: color 0.2s;
                 &:hover {
                     cursor: pointer;
@@ -674,11 +673,11 @@
 }
 
 .link {
-    // @include des;
+    @include des;
     &--action {
         display: flex;
         align-items: center;
-        // @include des;
+        @include des;
         font-weight: 600;
         span {
             margin-right: 0.5rem;
@@ -746,7 +745,7 @@
             cursor: pointer;
             display: flex;
             align-items: center;
-            // @include des;
+            @include des;
             color: $gray-600;
             font-weight: 400;
             &:before {
@@ -776,7 +775,7 @@
     &--favourite {
         label {
             cursor: pointer;
-            // @include des;
+            @include des;
             color: $gray-700;
             font-weight: 400;
         }
@@ -953,7 +952,7 @@
     &--item {
         background-color: $gray-600;
         color: white !important;
-        // @include des;
+        @include des;
         padding: 0.5rem 0.75rem;
         border-radius: 4px;
         font-weight: 600;
@@ -1042,13 +1041,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .tagify {
     &__tag {
         &-text {
-            // @include des;
+            @include des;
         }
     }
 }
 
 .tagify__input:empty::before {
-    // @include des;
+    @include des;
 }
 
 .tagify {

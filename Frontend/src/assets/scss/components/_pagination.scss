@@ -1,6 +1,6 @@
 .pagination {
   .page-link {
-    // @include des;
+    @include des;
     @include hover {
       border-color: $gray-100;
     }

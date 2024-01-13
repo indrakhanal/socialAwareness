@@ -1,12 +1,8 @@
 import React, {Suspense, Component } from 'react'
 import AppHeader from './Header/Header'
-// import Sidebar from './Sidebar/sidebar'
+import Contact from './Contact/index'
+import Campaign from './Campaign/index'
 import AppFooter from './Footer/footer'
-// import "../../../assets/dashboard/scss/style.scss"
-import FallbackLoader from '../../../components/React/FallBackLoader/FallBackLoader'
-// import AppContent from './AppContent'
-import routes from '../../../routes/routes'
-import {Route, Routes } from 'react-router-dom'
 import ReactGA from "react-ga"
 import $ from "jquery"
 
@@ -50,28 +46,13 @@ class App extends Component<AppProps, AppState> {
 
   render() {
     return (
-      <Suspense fallback={<FallbackLoader/>}>
       <div className="App">
           <AppHeader data={this.state.siteData.main} />
-            <Routes>
-            {routes.map((route, idx) => {
-              return (
-                route.path && (
-                  <Route
-                    key={idx}
-                    path={route.path}
-                    element={<route.component />}
-                  />
-                )
-              )
-            })}
-            {/* <Route path="/" element={<CreatePost />} /> */}
-            {/* <Route path="#post" element={<CreatePost />} /> */}
-  
-          </Routes>
-          <AppFooter />
+          <Campaign data={this.state.siteData.main} />
+          
+          <Contact data={this.state.siteData.main} />
+          {/* <AppFooter /> */}
         </div>
-      </Suspense>
     )
   }
 }

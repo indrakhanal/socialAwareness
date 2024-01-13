@@ -5,7 +5,6 @@ import appRoutes from "./routes/routes";
 import PrivateRoute from "./routes/PrivateRoute/PrivateRoute";
 import useAuthentication from "./services/authentication/AuthService";
 import TokenService from "./services/jwt-token/jwt-token";
-import { geti18nLanguage, switchI18nLanguage } from "./store/modules/i18n/i18n";
 import {addUserDetails} from "./store/modules/userDetails";
 import { RootState } from "./store/root-reducer";
 import "./App.scss";

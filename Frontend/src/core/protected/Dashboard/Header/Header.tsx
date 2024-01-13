@@ -38,23 +38,10 @@ const AppHeader: React.FC<AppHeaderProps> = ({ data }) => {
           </li>
 
           <li>
-            <a className="smoothscroll" href="#about">
-              About
+            <a className="smoothscroll" href="#campaign">
+              Campaign
             </a>
           </li>
-
-          <li>
-            <a className="smoothscroll" href="#resume">
-              Resume
-            </a>
-          </li>
-
-          <li>
-            <a className="smoothscroll" href="#portfolio">
-              Works
-            </a>
-          </li>
-
           <li>
             <a className="smoothscroll" href="#contact">
               Contact

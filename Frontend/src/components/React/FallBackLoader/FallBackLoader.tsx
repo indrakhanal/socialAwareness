@@ -1,6 +1,6 @@
 import Loader from "../../UI/Loader/index";
 import React from "react";
-import logo from "../../../assets/images/AMS-LOGO-ORIGINAL.png";
+// import logo from "../../../assets/images/AMS-LOGO-ORIGINAL.png";
 
 
 interface FallbackProps {
@@ -15,7 +15,7 @@ export default function FallbackLoader({ h, styles }: FallbackProps) {
       style={{ position: "relative", width: "100%", height: (h ? h : 100) + "vh", ...styles }}
     >
       <img
-        src={logo}
+        // src={logo}
         alt="Loader"
         style={{
           position: "absolute",

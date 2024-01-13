@@ -128,10 +128,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      // [class^="ic-"],
-      // [class*=" ic-"] {
-      //   @include h4;
-      // }
+      [class^="ic-"],
+      [class*=" ic-"] {
+        @include h4;
+      }
     }
 
     @each $name, $value in $information-color {
@@ -186,15 +186,15 @@
         padding: 0.25rem 0.5rem;
         min-width: 28px;
         text-align: center;
-        // @include des;
+        @include des;
         &:not(:last-child) {
           margin-right: 0.5rem;
         }
 
-        // [class^="ic-"],
-        // [class*=" ic-"] {
-        //   @include small;
-        // }
+        [class^="ic-"],
+        [class*=" ic-"] {
+          @include small;
+        }
       }
     }
   }
