@@ -37,8 +37,13 @@ function Login(props: Props): ReactElement {
         props.addUserDetails(loginres.data);
         history("/home");
       } else {
+      
         const errorMessage = loginres?.message?.detail 
         toast.error(errorMessage);
+        setTimeout(() => {
+          window.location.reload()
+        }, 2000);
+    
         // Configure(errorMessage, loginres?.status)
       }
     },

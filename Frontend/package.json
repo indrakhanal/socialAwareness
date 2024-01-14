@@ -24,6 +24,7 @@
     "bootstrap": "4.5.3",
     "formik": "^2.2.9",
     "i18next": "^22.0.5",
+    "jquery": "^3.7.1",
     "node-sass": "^7.0.3",
     "particles-bg": "^2.5.5",
     "react": "^18.2.0",
@@ -72,6 +73,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-scroll": "^1.8.10",
     "env-cmd": "^10.1.0",
     "react-app-env": "^1.2.3",
     "sass": "^1.56.1"

@@ -1,6 +1,7 @@
 import React from "react"
 import ParticlesBg from "particles-bg"
 import {logoutAction} from '../../../../store/root-reducer' 
+import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll'
 
 // import Fade from "react-reveal/Fade"
 
@@ -29,23 +30,21 @@ const AppHeader: React.FC<AppHeaderProps> = ({ data }) => {
         <a className="mobile-btn" href="#home" title="Hide navigation">
           Hide navigation
         </a>
-
         <ul id="nav" className="nav">
-          <li className="current">
-            <a className="smoothscroll" href="#home">
+          <li className="current smoothscroll">
+            <ScrollLink to="home" smooth={true} duration={500}>
               Home
-            </a>
+            </ScrollLink>
           </li>
-
           <li>
-            <a className="smoothscroll" href="#campaign">
+            <ScrollLink to="campaign" smooth={true} duration={500}>
               Campaign
-            </a>
+            </ScrollLink>
           </li>
           <li>
-            <a className="smoothscroll" href="#contact">
+            <ScrollLink to="contact" smooth={true} duration={500}>
               Contact
-            </a>
+            </ScrollLink>
           </li>
           <li>
             <a className="smoothscroll" onClick={logoutAction}>
