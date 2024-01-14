@@ -844,7 +844,7 @@ call-to-action .button {
 #contact select {
    padding: 10px 20px;
 	color: #eee;
-	background: #373233;
+	/* background: #373233; */
 	margin-bottom: 42px;
 	border: 0;
 	outline: none;

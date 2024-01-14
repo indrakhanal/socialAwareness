@@ -1,5 +1,6 @@
 import React, { ChangeEvent, Component, FormEvent } from "react";
 import { Fade, Slide } from "react-awesome-reveal";
+import './style.css'
 // import { Fade, Slide } from "react-reveal";
 
 interface ContactProps {
@@ -136,10 +137,10 @@ class Contact extends Component<ContactProps, ContactState> {
                 <p className="address">
                   {name}
                   <br />
-                  {street} <br />
-                  {city}, {state} {zip}
-                  <br />
-                  <span>{phone}</span>
+                  Street 2001, Sydney <br />
+                  
+                  
+                  <span>+6173943453</span>
                 </p>
               </div>
 

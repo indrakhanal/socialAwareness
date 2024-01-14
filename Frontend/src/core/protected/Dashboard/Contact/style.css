@@ -1,0 +1,96 @@
+/* Assuming that your HTML structure includes a container element with class "row" */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  
+  #contact {
+    background: burlywood;
+    padding-top: 96px;
+    padding-bottom: 102px;
+    color: #636363;
+}
+#contact p.lead {
+    font: 18px/36px 'opensans-light', sans-serif;
+    padding-right: 3%;
+    color: brown;
+}
+
+#contact input, #contact textarea, #contact select {
+    padding: 10px 20px;
+    color: #eee;
+    margin-bottom: 42px;
+    border: 0;
+    outline: none;
+    font-size: 15px;
+    line-height: 24px;
+    width: 65%;
+}
+
+
+#contact button.submit {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #fff;
+    background: brown;
+    border: none;
+    cursor: pointer;
+    height: auto;
+    display: inline-block;
+    border-radius: 0px;
+    margin-left: 26%;
+}
+#contact h4 {
+    font: 16px/24px 'opensans-bold', sans-serif;
+    color: brown;
+    margin-bottom: 6px;
+}
+
+#contact label {
+    font: 15px/24px 'opensans-bold', sans-serif;
+    margin: 12px 0;
+    color: brown;
+    display: inline-block;
+    
+    width: 26%;
+}
+
+
+  
+  .row {
+    margin-left: 200px; /* Adjust margin-left as needed */
+  }
+  
+  /* Additional styles for the "Coming Soon!!" text */
+  section {
+    /* max-width: 800px; */
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
+  h1, h2 {
+    color: #3498db;
+    margin-top: 70px;
+  }
+  
+  p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
