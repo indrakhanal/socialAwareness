@@ -1,22 +1,51 @@
-import React from "react"
-import ParticlesBg from "particles-bg"
-import {logoutAction} from '../../../../store/root-reducer' 
-
-// import Fade from "react-reveal/Fade"
+import React, { useEffect } from "react";
+import ParticlesBg from "particles-bg";
+import { logoutAction } from "../../../../store/root-reducer";
 
 interface AppHeaderProps {
   data: {
-    project: string;
-    github: string;
     name: string;
     description: string;
-  };
+  } | null;
 }
 
 const AppHeader: React.FC<AppHeaderProps> = ({ data }) => {
-  if (!data) return null;
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
 
-  const { project, github, name, description } = data;
+    const smoothScrollLinks = document.querySelectorAll<HTMLAnchorElement>('.smoothscroll');
+
+    const handleClick = function (event: MouseEvent) {
+      event.preventDefault(); // Prevent the default behavior of the anchor tag.
+
+      const targetId = (event.target as HTMLAnchorElement).getAttribute('href')?.substring(1);
+      const targetElement = document.getElementById(targetId || '');
+
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: 'smooth',
+        });
+      }
+    };
+
+    smoothScrollLinks.forEach((link) => {
+      link.addEventListener('click', handleClick);
+    });
+
+    return () => {
+      smoothScrollLinks.forEach((link) => {
+        link.removeEventListener('click', handleClick);
+      });
+    };
+  }, [data]);
+
+  if (!data) {
+    return null;
+  }
+
+  const { name, description } = data;
 
   return (
     <header id="home">
@@ -57,23 +86,9 @@ const AppHeader: React.FC<AppHeaderProps> = ({ data }) => {
 
       <div className="row banner">
         <div className="banner-text">
-          {/* <Fade bottom> */}
-            <h1 className="responsive-headline">{name}</h1>
-          {/* </Fade> */}
-          {/* <Fade bottom duration={1200}> */}
-            <h3>{description}.</h3>
-          {/* </Fade> */}
+          <h1 className="responsive-headline">{name}</h1>
+          <h3>{description}.</h3>
           <hr />
-          {/* <Fade bottom duration={2000}> */}
-            {/* <ul className="social">
-              <a href={project} className="button btn project-btn">
-                <i className="fa fa-book"></i>Project
-              </a>
-              <a href={github} className="button btn github-btn">
-                <i className="fa fa-github"></i>Github
-              </a>
-            </ul> */}
-          {/* </Fade> */}
         </div>
       </div>
 
