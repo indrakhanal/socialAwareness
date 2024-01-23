@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import ParticlesBg from "particles-bg";
 import { logoutAction } from "../../../../store/root-reducer";
+import acsImage from '../../../../assets/images/acs.jpeg';
+
 
 interface AppHeaderProps {
   data: {
@@ -16,7 +17,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({ data }) => {
     }
 
     const smoothScrollLinks = document.querySelectorAll<HTMLAnchorElement>('.smoothscroll');
-
+    
     const handleClick = function (event: MouseEvent) {
       event.preventDefault(); // Prevent the default behavior of the anchor tag.
 
@@ -49,17 +50,21 @@ const AppHeader: React.FC<AppHeaderProps> = ({ data }) => {
 
   return (
     <header id="home">
-      <ParticlesBg type="circle" bg={true} />
+      {/* <ParticlesBg type="circle" bg={true} /> */}
 
       <nav id="nav-wrap">
+    
+
         <a className="mobile-btn" href="#nav-wrap" title="Show navigation">
           Show navigation
         </a>
         <a className="mobile-btn" href="#home" title="Hide navigation">
           Hide navigation
         </a>
-
         <ul id="nav" className="nav">
+        <div className="logo-container">
+    <img src={acsImage} alt="ACS Logo" />
+  </div>
           <li className="current">
             <a className="smoothscroll" href="#home">
               Home
@@ -86,13 +91,17 @@ const AppHeader: React.FC<AppHeaderProps> = ({ data }) => {
 
       <div className="row banner">
         <div className="banner-text">
-          <h1 className="responsive-headline">{name}</h1>
+          {/* <h1 className="responsive-headline">{name}</h1> */}
           <h3>{description}.</h3>
-          <hr />
+          <br />
+         <h2>{name}</h2> 
+
+          <a href="#" className="btn btn-primary">Join a Cause</a>
+      <a href="#" className="btn btn-secondary">Explore Businesses</a>
         </div>
       </div>
 
-      <p className="scrolldown">
+      <p className="scrolldown">  
         <a className="smoothscroll" href="#about">
           <i className="icon-down-circle"></i>
         </a>
