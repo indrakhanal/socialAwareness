@@ -9,6 +9,8 @@
 /coverage
 Frontend/node_modules/
 /Frontend/node_modules/
+Backend/mainsite/__pycache__/
+/Backend/mainsite/__pycache__/
 
 # production
 /build

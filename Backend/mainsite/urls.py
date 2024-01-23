@@ -6,10 +6,13 @@ from .views import *
 
 from rest_framework import routers
 router = routers.DefaultRouter()
-# router.register('filter_location', filter_data, 'filter_location')
-app_name = 'pets'
+app_name = 'mainsite'
+router.register('cause', CauseView, 'cause')
+router.register('business', BusinessView, 'business')
+router.register('participation', ParticipationView, 'participation')
+
 
 urlpatterns = [
-    path('v1/', include(router.urls)),
+    path('main/', include(router.urls)),
 ]
 
