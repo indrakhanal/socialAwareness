@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+# Ignore Python bytecode files
+__pycache__/
+*.pyc
 # testing
 /coverage
 Frontend/node_modules/

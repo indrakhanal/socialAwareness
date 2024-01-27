@@ -59,32 +59,36 @@ export enum RequestMethod {
         actionName: "INIT",
         requestMethod: RequestMethod.GET
       },
-      autosearch:{
-        controllerName:"/api/v1/search_animal/",
-        actionName:"AUTOSEARCH",
+      userDetails:{
+        controllerName:"/api/user/detail/",
+        actionName:"DETAILS",
         requestMethod: RequestMethod.GET
       },
-      category:{
-        controllerName:"/api/v1/get_breed_with_category/",
-        actionName:"CATEGORY",
+      cause:{
+        controllerName:"/api/main/cause/",
+        actionName:"CAUSE",
+        requestMethod: RequestMethod.POST
+      },
+      business:{
+        controllerName:"/api/main/business/",
+        actionName:"BUSINESS",
+        requestMethod: RequestMethod.POST
+      },
+      homepageData:{
+        controllerName:"/api/user/alldata/",
+        actionName:"HOMEPAGEDATA",
         requestMethod: RequestMethod.GET
       },
-      district:{
-        controllerName:"/api/v1/all_district/",
-        actionName:"DISTRICT",
+      getCauseById:{
+        controllerName:"/api/main/cause/{id}/",
+        actionName:"GETCAUSE",
         requestMethod: RequestMethod.GET
       },
-      categoryList:{
-        controllerName:"/api/v1/all_category/",
-        actionName:"CATEGORYLIST",
+      getBusinessById:{
+        controllerName:"/api/main/business/{id}/",
+        actionName:"GETBUSINESS",
         requestMethod: RequestMethod.GET
       },
-      MuniciapilityList:{
-        controllerName:"/v1/get_municipality/",
-        actionName:"MUNICIAPILITYLIST",
-        requestMethod: RequestMethod.GET
-      }
-
     },
     
 }

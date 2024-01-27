@@ -2,6 +2,7 @@ import React, {Suspense, Component } from 'react'
 import AppHeader from './Header/Header'
 import Contact from './Contact/index'
 import Campaign from './Campaign/index'
+import MultitabBody from './Tabs/index'
 import AppFooter from './Footer/footer'
 import ReactGA from "react-ga"
 import $ from "jquery"
@@ -48,8 +49,8 @@ class App extends Component<AppProps, AppState> {
     return (
       <div className="App">
           <AppHeader data={this.state.siteData.main} />
+          <MultitabBody />
           <Campaign data={this.state.siteData.main} />
-          
           <Contact data={this.state.siteData.main} />
           {/* <AppFooter /> */}
         </div>

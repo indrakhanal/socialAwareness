@@ -1,28 +1,90 @@
-import React from "react"
-import ParticlesBg from "particles-bg"
-import {logoutAction} from '../../../../store/root-reducer' 
-import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll'
+import React, { useEffect, useState } from "react";
+import { logoutAction } from "../../../../store/root-reducer";
+import acsImage from '../../../../assets/images/acs.jpeg';
 
-// import Fade from "react-reveal/Fade"
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../../store/root-reducer";
+import { getUserDetailssAction } from '../../../../store/modules/categories/getcategory';
+import MyModal from "../bootstrapModal";
+import CauseModal from "../ModalForm/addCause"
+import BusinessModal from "../ModalForm/addBusiness"
+
 
 interface AppHeaderProps {
   data: {
-    project: string;
-    github: string;
     name: string;
     description: string;
-  };
+  } | null;
 }
 
 const AppHeader: React.FC<AppHeaderProps> = ({ data }) => {
-  if (!data) return null;
+  const [showModal, setShowModal] = useState(false);
+  const [showBusinessModal, setBusinessModal] = useState(false);
+  const [showCauseModal, setCauseModal] = useState(false);
 
-  const { project, github, name, description } = data;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
+
+    const smoothScrollLinks = document.querySelectorAll<HTMLAnchorElement>('.smoothscroll');
+
+    const handleClick = function (event: MouseEvent) {
+      event.preventDefault(); // Prevent the default behavior of the anchor tag.
+
+      const targetId = (event.target as HTMLAnchorElement).getAttribute('href')?.substring(1);
+      const targetElement = document.getElementById(targetId || '');
+
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: 'smooth',
+        });
+      }
+    };
+
+    smoothScrollLinks.forEach((link) => {
+      link.addEventListener('click', handleClick);
+    });
+
+    return () => {
+      smoothScrollLinks.forEach((link) => {
+        link.removeEventListener('click', handleClick);
+      });
+    };
+  }, [data]);
+
+  const handleShowModal = () => {
+    setShowModal(true);
+  };
+  const OpenBusinessModal = () =>{
+    setBusinessModal(true)
+  }
+  const OpenCausesModal = () =>{
+    setCauseModal(true)
+  }
+  const handleCloseModal = () => setShowModal(false);
+  const handleCloseCauseModal = () => setCauseModal(false);
+  const handleCloseBusinessModal = () => setBusinessModal(false);
+  const userProfile = useSelector(
+    (state: RootState) => state.ProfileReducer.data
+  );
+
+  useEffect(() => {
+    if (showModal) {
+      dispatch<any>(getUserDetailssAction());
+    }
+  }, [showModal, dispatch]);
+
+  if (!data) {
+    return null;
+  }
+
+  const { name, description } = data;
 
   return (
     <header id="home">
-      <ParticlesBg type="circle" bg={true} />
-
       <nav id="nav-wrap">
         <a className="mobile-btn" href="#nav-wrap" title="Show navigation">
           Show navigation
@@ -31,56 +93,58 @@ const AppHeader: React.FC<AppHeaderProps> = ({ data }) => {
           Hide navigation
         </a>
         <ul id="nav" className="nav">
-          <li className="current smoothscroll">
-            <ScrollLink to="home" smooth={true} duration={500}>
+          <div className="logo-container">
+            <img src={acsImage} alt="ACS Logo" />
+          </div>
+          <li className="current">
+            <a className="smoothscroll" href="#home">
               Home
-            </ScrollLink>
-          </li>
-          <li>
-            <ScrollLink to="campaign" smooth={true} duration={500}>
-              Campaign
-            </ScrollLink>
-          </li>
-          <li>
-            <ScrollLink to="contact" smooth={true} duration={500}>
-              Contact
-            </ScrollLink>
-          </li>
-          <li>
-            <a className="smoothscroll" onClick={logoutAction}>
-              LOGOUT
             </a>
+          </li>
+          <li>
+            <a className="smoothscroll" href="#campaign">
+              Campaign
+            </a>
+          </li>
+          <li>
+            <a className="smoothscroll" href="#contact">
+              Contact
+            </a>
+          </li>
+          <li>
+            <button onClick={handleShowModal}>
+              Profile
+            </button>
+          </li>
+          <li>
+            <button onClick={() => dispatch(logoutAction())}>
+              LOGOUT
+            </button>
           </li>
         </ul>
       </nav>
-
       <div className="row banner">
         <div className="banner-text">
-          {/* <Fade bottom> */}
-            <h1 className="responsive-headline">{name}</h1>
-          {/* </Fade> */}
-          {/* <Fade bottom duration={1200}> */}
-            <h3>{description}.</h3>
-          {/* </Fade> */}
-          <hr />
-          {/* <Fade bottom duration={2000}> */}
-            {/* <ul className="social">
-              <a href={project} className="button btn project-btn">
-                <i className="fa fa-book"></i>Project
-              </a>
-              <a href={github} className="button btn github-btn">
-                <i className="fa fa-github"></i>Github
-              </a>
-            </ul> */}
-          {/* </Fade> */}
+          <h3>{description}.</h3>
+          <br />
+          <h2>{name}</h2>
+          <br/><br/>
+          <button onClick={OpenCausesModal} className="btn btn-primary mr-2">Join a Cause</button>
+          <button onClick={OpenBusinessModal} className="btn btn-secondary mr-2">Explore Businesses</button>
         </div>
       </div>
-
       <p className="scrolldown">
         <a className="smoothscroll" href="#about">
           <i className="icon-down-circle"></i>
         </a>
       </p>
+      <div>
+        <MyModal show={showModal} data={userProfile} onHide={handleCloseModal} />
+        <CauseModal show={showCauseModal} onHide={handleCloseCauseModal} />
+        <BusinessModal show={showBusinessModal} onHide={handleCloseBusinessModal} />
+
+        
+      </div>
     </header>
   );
 };

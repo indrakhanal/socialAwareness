@@ -5,30 +5,22 @@ import i18nextReducer from "./modules/i18n/i18n";
 import userDetails from "./modules/userDetails/index"
 import outhReducer from "./modules/oauthservices";
 import registerReducer from "./modules/register/register";
-import categoryReducer from "./modules/categories/getcategory";
-import getSearchDataReducer from "./modules/autosearch/autocomplete"
-import getDistrictReducer from "./modules/partials/district";
-import getCatListReducer from "./modules/partials/categories";
-import getMuniciapilityReducer from "./modules/partials/getmunicapality";
-
-// import {addUserDetailsGoogle} from  "./modules/userDetails/index"
-
-
+import ProfileReducer from "./modules/categories/getcategory";
+import getCauseReducer from "./modules/partials/addCause";
+import getBusinessReducer from "./modules/partials/addBusiness";
+import getHomePagesActionReducer from "./modules/partials/gethomePageData"
+import getCauseDetailsByIdActionReducer from "./modules/partials/getCauseById"
+import getBusinessDetailsByIdActionReducer from "./modules/partials/getBusinessById"
 export const appReducer = combineReducers({
     i18nextData: i18nextReducer,
     loginData: loginReducer,
     registerData: registerReducer,
     outhService:outhReducer,
-    userDetails,categoryReducer,
-     getSearchDataReducer,
-     getDistrictReducer,
-     getCatListReducer,
-     getMuniciapilityReducer
-    // addUserDetailsGoogle
-    // outhService: outhReducer,
-    // schemeName,
-    // userDetails,
-    
+    userDetails,ProfileReducer,
+    getCauseReducer,getBusinessReducer,
+    getHomePagesActionReducer,
+    getCauseDetailsByIdActionReducer,
+    getBusinessDetailsByIdActionReducer
 });
 
 export type RootState = ReturnType<typeof appReducer>;

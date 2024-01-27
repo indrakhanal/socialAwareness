@@ -19,6 +19,7 @@ class Business(models.Model):
     contact_email = models.EmailField()
     contact_phone = models.CharField(max_length=20)
     admin_approved = models.BooleanField(default=False)
+    date_created = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):

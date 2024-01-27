@@ -45,7 +45,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
 
-
+def create_username(email):
+    return email.split("@")[0]
 class CustomUserManager(BaseUserManager):
     """
     Custom user model manager where email is the unique identifiers
@@ -57,6 +58,10 @@ class CustomUserManager(BaseUserManager):
         Create and save a User with the given email and password.
         """
         super_user_check = extra_fields.get('is_superuser')
+        username = extra_fields.get('username', None)
+        if username is None:
+            username = create_username(email)
+            extra_fields['username'] = username
         if super_user_check is True:
             user = self.model(email=email, **extra_fields)
             user.set_password(password)

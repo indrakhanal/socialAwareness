@@ -6,12 +6,6 @@ import './style.css'
 interface CampaignProps {
   data: {
     name: string;
-    address: {
-      street: string;
-      city: string;
-      state: string;
-      zip: string;
-    };
     phone: string;
     contactmessage: string;
   };
@@ -42,21 +36,21 @@ class Campaign extends Component<CampaignProps,CampaignState> {
     const { data } = this.props;
 
     if (!data) return null;
-
-    const name = data.name;
-    const street = data.address.street;
-    const city = data.address.city;
-    const state = data.address.state;
-    const zip = data.address.zip;
-    const phone = data.phone;
-    const message = data.contactmessage;
     return (
         <section id="campaign">
         <div className="row" style={{ marginLeft: '200px' }}>
-            <div className="eight columns">
-                    <h1>CAMPAIGN</h1><br/>
-                    <h3>COMING SOON!!</h3>
-            </div>
+           
+           
+        <h2>INTRODUCTION</h2>
+        <p>With a vision to promote awareness of social issues and facilitate a space for users to advocate causes and support small businesses, this application endeavors to empower individuals to make a positive impact on society.</p>
+    <br /><br />
+        <h2>PURPOSE</h2>
+        <ul>
+            <li><strong>Raise Social Awareness:</strong> The platform serves as a hub for users to discover, create, and participate in various social causes,allowing them to champion issues close to their hearts and drive awareness for impactful change.</li>
+            <li><strong>Promote Small Businesses:</strong> Alongside supporting causes, the application provides a platform for small business owners to showcase their services, gain exposure, and connect with potential customers, fostering economic growth within communities.</li>
+        </ul>
+    
+            
 
         </div>
       </section>

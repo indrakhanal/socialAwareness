@@ -14,5 +14,7 @@ router.register('participation', ParticipationView, 'participation')
 
 urlpatterns = [
     path('main/', include(router.urls)),
+    path('user/detail/', GetUserData.as_view(), name='user_details'),
+    path('user/alldata/', GetCauseAndBusinessData.as_view(), name='all_data')
 ]
 

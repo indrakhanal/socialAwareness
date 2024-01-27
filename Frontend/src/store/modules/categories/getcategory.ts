@@ -8,27 +8,30 @@ import initialState from "../../helper/default-state";
 
 
 export type ComponentCategoriesType = {
-    id: number,
-    name: string,
-    breed: [
-        {
-            id:number
-            name:string
-        }
-    ]
+    cause:[],
+    business: [],
 }[]
 
-const apiDetails = Object.freeze(apiList.oauth.category);
+const apiDetails = Object.freeze(apiList.oauth.userDetails);
 
-export default function getCategoriesReducer(state = initialState, action: DefaultAction): DefaultState<ComponentCategoriesType> {
+export default function getUserDetails(state = initialState, action: DefaultAction): DefaultState<ComponentCategoriesType> {
     const stateCopy = Object.assign({}, state);
     const actionName = apiDetails.actionName;
 
     return initDefaultReducer(actionName, action, stateCopy);
 }
 
-export const getCategoriesAction = (): AppThunk<APIResponseDetail<ComponentCategoriesType>> => async (dispatch: Dispatch) => {
+export const getUserDetailssAction = (): AppThunk<APIResponseDetail<ComponentCategoriesType>> => async (dispatch: Dispatch) => {
     const updatedDetails = { ...apiDetails }
 
-    return await initDefaultAction(apiDetails, dispatch, updatedDetails);
+    return await initDefaultAction(apiDetails, dispatch);
 };
+
+
+// export const getUserDetailssAction = (accessToken: string): AppThunk<APIResponseDetail<ComponentCategoriesType>> => async (dispatch: Dispatch) => {
+//     const updatedDetails = {
+//         ...apiDetails,
+//         headers: { Authorization: `Bearer ${accessToken}` }
+//       };
+//     return await initDefaultAction(updatedDetails, dispatch);
+//   };

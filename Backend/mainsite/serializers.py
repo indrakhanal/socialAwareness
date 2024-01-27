@@ -2,6 +2,7 @@ from .models import *
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 User = get_user_model()
+from django.shortcuts import get_object_or_404
 
 
 class CauseSerializer(serializers.ModelSerializer):
@@ -9,14 +10,14 @@ class CauseSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Cause
-        fields = ["title", "description", "user", "date_created"]
+        fields = ["title", "description", "date_created"]
 
 
 class BusinessSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Business
-        fields = ["name", "description", "contact_person", "contact_email", "contact_phone", "user"]
+        fields = ["name", "description", "contact_person", "contact_email", "contact_phone"]
 
 
 class ParticipationSerializer(serializers.ModelSerializer):

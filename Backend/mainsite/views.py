@@ -6,24 +6,46 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
+from rest_framework.views import APIView
 from .models import (Cause,
                      Business, 
                      Participation)
+from accounts.models import CustomUser
+User = get_user_model()
 
 class CauseView(viewsets.ModelViewSet):
     serializer_class =  CauseSerializer
     permission_classes = (IsAuthenticated,)
     
     def get_queryset(self, *args, **kwargs):
-	    return Cause.objects.filter(user__id = self.request.user.id)
+	    return Cause.objects.all()
     
+    def perform_create(self, serializer):
+        user_instance = get_object_or_404(CustomUser, id=self.request.user.id)
+        serializer.validated_data['user'] = user_instance
+        instance = serializer.save()
+        return instance
+    
+    def list(self, request, *args, **kwargs):
+        return Response(Cause.objects.filter(id=request.user.id))
 
 class BusinessView(viewsets.ModelViewSet):
     serializer_class =  BusinessSerializer
     permission_classes = (IsAuthenticated,)
     
     def get_queryset(self, *args, **kwargs):
-	    return Business.objects.filter(user__id = self.request.user.id, admin_approved=True)
+	    return Business.objects.all()
+    
+    def perform_create(self, serializer):
+        user_instance = get_object_or_404(CustomUser, id=self.request.user.id)
+        serializer.validated_data['user'] = user_instance
+        instance = serializer.save()
+        return instance
+   
+    
+    def list(self, request, *args, **kwargs):
+         return Response(Business.objects.filter(id=request.user.id, admin_approved=True).values())
+        #  return super().list(request, *args, **kwargs)
     
 
 
@@ -34,3 +56,28 @@ class ParticipationView(viewsets.ModelViewSet):
     def get_queryset(self, *args, **kwargs):
 	    return Participation.objects.filter(user__id = self.request.user.id)
 
+
+
+class GetUserData(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request, *args, **kwargs):
+        cause = Cause.objects.filter(user__id=request.user.id).values()
+        business = Business.objects.filter(user__id=request.user.id).values()
+        data = {}
+        data["cause"] = cause
+        data["business"]= business
+        return Response(data)
+
+
+
+class GetCauseAndBusinessData(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request, *args, **kwargs):
+        cause = Cause.objects.all().order_by('-id').values('id','title','description', 'date_created', 'user__email')
+        business = Business.objects.filter(admin_approved=True).order_by('-id').values('id','name', 'description','contact_person','contact_email', 'contact_phone','date_created', 'user__email' )
+        data = {}
+        data["cause"] = cause
+        data["business"]= business
+        return Response(data)
