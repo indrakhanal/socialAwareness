@@ -11,6 +11,9 @@ import getBusinessReducer from "./modules/partials/addBusiness";
 import getHomePagesActionReducer from "./modules/partials/gethomePageData"
 import getCauseDetailsByIdActionReducer from "./modules/partials/getCauseById"
 import getBusinessDetailsByIdActionReducer from "./modules/partials/getBusinessById"
+import deleteCauseDetailsByIdActionReducer from "./modules/partials/deleteCause"
+import deleteBusinessDetailsByIdActionReducer from "./modules/partials/deleteCause"
+
 export const appReducer = combineReducers({
     i18nextData: i18nextReducer,
     loginData: loginReducer,
@@ -20,7 +23,9 @@ export const appReducer = combineReducers({
     getCauseReducer,getBusinessReducer,
     getHomePagesActionReducer,
     getCauseDetailsByIdActionReducer,
-    getBusinessDetailsByIdActionReducer
+    getBusinessDetailsByIdActionReducer,
+    deleteCauseDetailsByIdActionReducer,
+    deleteBusinessDetailsByIdActionReducer
 });
 
 export type RootState = ReturnType<typeof appReducer>;

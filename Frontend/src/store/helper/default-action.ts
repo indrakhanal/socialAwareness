@@ -4,7 +4,7 @@ import { Dispatch } from 'redux';
 import initDispatchTypes from './default-action-type';
 import initApiRequest from '../../services/api-request/api-request';
 import { apiDetailType } from '../../store/ActionNames';
-import { FailToast, SuccessToast } from '../../components/Notifier/Notifier';
+import { FailToast } from '../../components/Notifier/Notifier';
 // import { requestTimeoutLanguage, noConnectionLanguage } from '../../i18n/i18n';
 
 /**
@@ -48,7 +48,6 @@ interface CustomResponse<TData = any> extends AxiosResponse {
 
 export type APIResponseDetail<TData = any> = Promise<CustomResponse<TData>>
 
-let timeoutLanguageCount = 0;
 let noServerConnectionLanguageCount = 0;
 let noConnectionLanguageCount = 0;
 const axiosCancelSource = Axios.CancelToken.source();
@@ -73,7 +72,7 @@ export default async function initDefaultAction(apiDetails: apiDetailType, dispa
     const sanitizedApiDetails = sanitizeController(apiDetails, pathVariables);
 
 
-    let  responseData;
+    let  responseData:any;
     try {
         responseData = await initApiRequest(sanitizedApiDetails, requestData, requestMethod || sanitizedApiDetails.requestMethod || "GET", params, cancelSource || axiosCancelSource);
 
@@ -84,49 +83,51 @@ export default async function initDefaultAction(apiDetails: apiDetailType, dispa
             // No work done
             
         } else { 
-            if (requestMethod !== "GET") {
-                SuccessToast(responseData.data?.message)
-            }
+            //No work done
+            // if (requestMethod !== "GET") {
+            //     SuccessToast(`Data ${requestMethod?requestMethod:'Fetched'} Successfully!!`)
+            // }
         }
 
     } catch (customThrownError) {
         responseData = customThrownError;
 
-        // // Failure Dispatch
-        // dispatch({ type: dispatchTypes.failureDispatch, payload: responseData.data });
-        // if (disableFailureToast || disableToast) {
-        //     // No work done
-        // } else {
-        //     responseData.data?.message && FailToast(responseData.data.message);
-        // }
+        // Failure Dispatch
+        dispatch({ type: dispatchTypes.failureDispatch, payload: responseData.data });
+        if (disableFailureToast || disableToast) {
+            // No work done
+        } else {
+            FailToast(responseData.message.detail?responseData.message.detail:'something went wrong!')
+            // responseData.data?.message && FailToast(responseData.data.message);
+        }
 
-        // // Axios Timeout
+        // Axios Timeout
         // if (responseData.config.code === 'ECONNABORTED') {
         //     if (!timeoutLanguageCount) {
         //         timeoutLanguageCount++;
         //         FailToast("Request Time Out")
         //         // FailToast(requestTimeoutLanguage());
         //     }
-        // }
+        // }s
 
         // No Connection
-        // if (responseData.noconnection) {
-        //     // No Server Connection
-        //     if (responseData.message === 'Server could not be reached') {
-        //         if (!noServerConnectionLanguageCount) {
-        //             noServerConnectionLanguageCount++;
-        //             FailToast("Server Could not reached")
-        //             // FailToast(noConnectionLanguage());
-        //         }
-        //     }
-        //     // No Connection
-        //     else if (responseData.config.code !== 'ECONNABORTED') {
-        //         if (!noConnectionLanguageCount) {
-        //             noConnectionLanguageCount++;
-        //             FailToast("error");
-        //         }
-        //     }
-        // }
+        if (responseData.noconnection) {
+            // No Server Connection
+            if (responseData.message === 'Server could not be reached') {
+                if (!noServerConnectionLanguageCount) {
+                    noServerConnectionLanguageCount++;
+                    FailToast("Server Could not reached")
+                    // FailToast(noConnectionLanguage());
+                }
+            }
+            // No Connection
+            else if (responseData.config.code !== 'ECONNABORTED') {
+                if (!noConnectionLanguageCount) {
+                    noConnectionLanguageCount++;
+                    FailToast("error");
+                }
+            }
+        }
     }
 
     return responseData as APIResponseDetail | Promise<any>;

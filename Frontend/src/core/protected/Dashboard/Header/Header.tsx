@@ -139,9 +139,9 @@ const AppHeader: React.FC<AppHeaderProps> = ({ data }) => {
         </a>
       </p>
       <div>
-        <MyModal show={showModal} data={userProfile} onHide={handleCloseModal} />
-        <CauseModal show={showCauseModal} onHide={handleCloseCauseModal} />
-        <BusinessModal show={showBusinessModal} onHide={handleCloseBusinessModal} />
+        <MyModal show={showModal} data={userProfile} editData={''} onHide={handleCloseModal} />
+        <CauseModal show={showCauseModal} editData={''} onHide={handleCloseCauseModal} />
+        <BusinessModal show={showBusinessModal} editBusinessData={''} onHide={handleCloseBusinessModal} />
 
         
       </div>

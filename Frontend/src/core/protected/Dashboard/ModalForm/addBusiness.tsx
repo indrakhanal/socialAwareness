@@ -1,58 +1,122 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import toast from "../../../../components/Notifier/Notifier";
 import { addBusiness } from '../../../../store/modules/partials/addBusiness'
+import { UpdateBusinessDetailsByIdAction } from '../../../../store/modules/partials/updateBusiness'
+import { getUserDetailssAction } from '../../../../store/modules/categories/getcategory';
 
 
 interface MyModalProps {
-    show: boolean;
-    onHide: () => void;
-  }
-  
-  interface BusinessDetails {
-    name :string	
-    description :string	
-    contact_person :string	
-    contact_email :string	
-    contact_phone :string	
-}  
+  show: boolean;
+  onHide: () => void;
+  editBusinessData: any
+}
 
-const BusinessModal: React.FC<MyModalProps> = ({ show, onHide }) => {
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [contactPerson, setcontactPerson] = useState('');
-    const [contactEmail, setcontactEmail] = useState('');
-    const [contactPhone, setcontactPhone] = useState('');
+interface BusinessDetails {
+  name: string
+  description: string
+  contact_person: string
+  contact_email: string
+  contact_phone: string
+}
 
-    const dispatch = useDispatch();
-    const handleSave = async (userDetails: BusinessDetails) => {
-        const response: any = await dispatch<any>(addBusiness(userDetails));
-        if(response.status === 201){
-            setName('');
-            setDescription('')
-            setcontactPerson('')
-            setcontactEmail('')
-            setcontactPhone('')
-            toast.success("Cause Created Successfully")
-        }else{
-            toast.error("Something Went Wrong!")
+const BusinessModal: React.FC<MyModalProps> = ({ show, onHide, editBusinessData }) => {
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [contactPerson, setcontactPerson] = useState('');
+  const [contactEmail, setcontactEmail] = useState('');
+  const [contactPhone, setcontactPhone] = useState('');
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (editBusinessData) {
+      setName(editBusinessData.name || '');
+      setDescription(editBusinessData.description || '');
+      setcontactPerson(editBusinessData.contact_person || '')
+      setcontactEmail(editBusinessData.contact_email || '')
+      setcontactPhone(editBusinessData.contact_phone || '')
+    } else {
+      setName('');
+      setDescription('');
+      setcontactPerson('')
+      setcontactEmail('')
+      setcontactPhone('')
+    }
+  }, [editBusinessData]);
+
+  const handleSave = async (userDetails: BusinessDetails) => {
+    if (editBusinessData.id) {
+      const response: any = await dispatch<any>(UpdateBusinessDetailsByIdAction(userDetails, editBusinessData.id));
+      if (response.status === 200) {
+        setName('');
+        setDescription('')
+        setcontactPerson('')
+        setcontactEmail('')
+        setcontactPhone('')
+        toast.success("Business Update Successfully")
+        onHide()
+        dispatch<any>(getUserDetailssAction());
+      } else {
+        try {
+          if (response.message && response.status===400) {
+            Object.keys(response.message).forEach((key: string) => {
+              const errorMessage = response.message[key];
+              toast.error(`${key}:${errorMessage[0]}`);
+            });
+          } else if(response.status === 500) {
+            toast.error("Server Error Encountered");
+          }else{
+            toast.error("Something Went Wrong");
+
+          }
+        } catch (error) {
+          toast.error(`${error}`);
         }
+      }
+    } else {
+      const response: any = await dispatch<any>(addBusiness(userDetails));
+      if (response.status === 201) {
+        setName('');
+        setDescription('')
+        setcontactPerson('')
+        setcontactEmail('')
+        setcontactPhone('')
+        toast.success("Business Created Successfully")
+      } else {
+        try {
+          if (response.message && response.status===400) {
+            Object.keys(response.message).forEach((key: string) => {
+              const errorMessage = response.message[key];
+              toast.error(`${key}:${errorMessage[0]}`);
+            });
+          } else if(response.status === 500) {
+            toast.error("Server Error Encountered");
+          }else{
+            toast.error("Something Went Wrong");
+
+          }
+        } catch (error) {
+          toast.error(`${error}`);
+        }
+      }
+    }
+  };
+
+  const handleSubmit = () => {
+    const businessDetails: BusinessDetails = {
+      name: name,
+      description: description,
+      contact_person: contactPerson,
+      contact_phone: contactPhone,
+      contact_email: contactEmail,
     };
 
-    const handleSubmit = () => {
-        const businessDetails: BusinessDetails = {
-            name: name,
-            description: description,
-            contact_person: contactPerson,
-            contact_phone:contactPhone,
-            contact_email:contactEmail,
-        };
-
-        handleSave(businessDetails);
-    };
+    handleSave(businessDetails);
+  };
   return (
     <>
       <Modal show={show} onHide={onHide}>
@@ -77,9 +141,9 @@ const BusinessModal: React.FC<MyModalProps> = ({ show, onHide }) => {
               controlId="exampleForm.ControlTextarea1"
             >
               <Form.Label>Description</Form.Label>
-              <Form.Control as="textarea" rows={2} 
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}/>
+              <Form.Control as="textarea" rows={2}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)} />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
               <Form.Label>Contact Person</Form.Label>

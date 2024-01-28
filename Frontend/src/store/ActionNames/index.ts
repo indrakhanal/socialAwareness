@@ -69,10 +69,20 @@ export enum RequestMethod {
         actionName:"CAUSE",
         requestMethod: RequestMethod.POST
       },
+      updateCause:{
+        controllerName:"/api/main/cause/{id}/",
+        actionName:"UPDATECAUSE",
+        requestMethod: RequestMethod.PUT
+      },
       business:{
         controllerName:"/api/main/business/",
         actionName:"BUSINESS",
         requestMethod: RequestMethod.POST
+      },
+      updateBusiness:{
+        controllerName:"/api/main/business/{id}/",
+        actionName:"UPDATEBUSINESS",
+        requestMethod: RequestMethod.PUT
       },
       homepageData:{
         controllerName:"/api/user/alldata/",
@@ -89,6 +99,26 @@ export enum RequestMethod {
         actionName:"GETBUSINESS",
         requestMethod: RequestMethod.GET
       },
+      deleteBusiness:{
+        controllerName:"/api/main/business/{id}/",
+        actionName:"DELETEBUSINESS",
+        requestMethod: RequestMethod.DELETE
+      },
+      deleteCause:{
+        controllerName:"/api/main/cause/{id}/",
+        actionName:"DELETEBUSINESS",
+        requestMethod: RequestMethod.DELETE
+      },
+      createCauseJoin:{
+        controllerName:"/api/user/create_participation/{id}/",
+        actionName:"CREATECAUSEJOIN",
+        requestMethod: RequestMethod.POST
+      },
+      deleteParticipations:{
+        controllerName:"/api/main/participation/{id}/",
+        actionName:"DELETEPARTICIPATION",
+        requestMethod: RequestMethod.DELETE
+      }
     },
     
 }

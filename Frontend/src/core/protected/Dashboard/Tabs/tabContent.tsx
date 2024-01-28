@@ -4,9 +4,11 @@ import './tabs.css'
 import { useDispatch, useSelector } from "react-redux";
 import { getCauseDetailsByIdAction } from '../../../../store/modules/partials/getCauseById';
 import { getBusinessDetailsByIdAction } from '../../../../store/modules/partials/getBusinessById';
-
+import {CreateCauseJoinAction} from '../../../../store/modules/partials/createCauseJoin'
 import { RootState } from "../../../../store/root-reducer";
 import DetailModal from '../ModalForm/detailModal';
+import toast from "../../../../components/Notifier/Notifier";
+
 
 interface MyModalProps {
     data: any;
@@ -44,6 +46,7 @@ const TabContent: React.FC<MyModalProps> = ({ data, options }) => {
 
   const [showModal, setShowModal] = useState(false);
   const [showBusinessModal, setshowBusinessModal] = useState(false);
+
   const handleShowModal = (id:any) => {
     dispatch<any>(getCauseDetailsByIdAction(id))
     setShowModal(true);
@@ -53,6 +56,18 @@ const TabContent: React.FC<MyModalProps> = ({ data, options }) => {
     dispatch<any>(getBusinessDetailsByIdAction(id))
     setshowBusinessModal(true)
   }
+
+  const handleCauseJoin = async (id:any) => {
+    const response: any = await dispatch<any>(CreateCauseJoinAction(id));
+        if(response.data === 201){
+            toast.success("Joined Successfully")
+        }else if(response.data === 400){
+            toast.error("You are Already Joined")
+        }else{
+            toast.error("Something Went Wrong!")
+        }
+  }
+
   const handleCloseModal = () => setShowModal(false);
   const handleClosBusinesseModal = () => setshowBusinessModal(false)
 
@@ -77,14 +92,13 @@ const TabContent: React.FC<MyModalProps> = ({ data, options }) => {
                         {data ? data.cause.map((item: any) => (
                             <div key={`user-${item.id}`} className="user-list__item col col-md-5 mr-6 mt-4 p-4">
                                 <div className='row'>
-                                    <div className='col col-md-6'>
+                                    <div className='col col-md-12'>
                                         <div className="user-list__name">User: {item.user__email}</div>
-                                        <div className="user-list__address">Title: {item.title}</div>
+                                        <div className="user-list__name">Title: <b>{item.title.length>47?item.title.slice(0, 47) + '....':item.title}</b></div>
                                         <div className="user-list__country">Created Time: {calculatePostedTime(item.date_created)}</div>
-
                                     </div>
-                                    <div className='col col-md-6 mt-6'>
-                                        <button className='btn btn-primary mr-2 float-right'>Join</button>
+                                    <div className='col col-md-6 mt-3'>
+                                        <button className='btn btn-primary mr-2 float-right' onClick={() => handleCauseJoin(item.id)}>Join</button>
                                         <button className='btn btn-primary mr-2 float-right' onClick={() => handleShowModal(item.id)}>view detail</button>
                                     </div>
                                 </div>
@@ -107,12 +121,12 @@ const TabContent: React.FC<MyModalProps> = ({ data, options }) => {
                         {data ? data.business.map((item: any) => (
                             <div key={`user-${item.id}`} className="user-list__item col col-md-5 mr-6 mt-4 p-4">
                                 <div className='row'>
-                                    <div className='col col-md-6'>
+                                    <div className='col col-md-12'>
                                         <div className="user-list__name">User: {item.user__email}</div>
-                                        <div className="user-list__address">Title: {item.name}</div>
+                                        <div className="user-list__name">Title: {item.name.length>47?item.name.slice(0, 47) + '....':item.name}</div>
                                         <div className="user-list__country">Created Time: {calculatePostedTime(item.date_created)}</div>
                                     </div>
-                                    <div className='col col-md-6 mt-6'>
+                                    <div className='col col-md-6 mt-3'>
                                         <button className='btn btn-primary mr-2 float-right'>Join</button>
                                         <button className='btn btn-primary mr-2 float-right' onClick={() => handleSBusinesshowModal(item.id)}>view detail</button>
                                     </div>

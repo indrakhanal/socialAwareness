@@ -64,9 +64,11 @@ class GetUserData(APIView):
     def get(self, request, *args, **kwargs):
         cause = Cause.objects.filter(user__id=request.user.id).values()
         business = Business.objects.filter(user__id=request.user.id).values()
+        participation = Participation.objects.filter(user__id=request.user.id).values('id','cause__title', 'cause__user__email')
         data = {}
         data["cause"] = cause
         data["business"]= business
+        data["participation"] = participation
         return Response(data)
 
 
@@ -81,3 +83,15 @@ class GetCauseAndBusinessData(APIView):
         data["cause"] = cause
         data["business"]= business
         return Response(data)
+    
+
+class CreatePrticipationData(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request, *args, **kwargs):
+        user_instance = get_object_or_404(CustomUser, id=self.request.user.id)
+        cause_instance = get_object_or_404(Cause, id=kwargs.get("id"))
+        if Participation.objects.filter(cause=cause_instance, user=user_instance).exists():
+             return Response(status.HTTP_400_BAD_REQUEST)
+        Participation.objects.create(user=user_instance, cause=cause_instance)
+        return Response(status.HTTP_201_CREATED)
